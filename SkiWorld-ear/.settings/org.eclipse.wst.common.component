@@ -2,7 +2,7 @@
     <wb-module deploy-name="SkiWorld-ear">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
-        <dependent-module archiveName="SkiWorld-web.war" deploy-path="/" handle="module:/resource/SkiWorld-web/SkiWorld-web">
+        <dependent-module archiveName="SkiWorld-web.war" deploy-path="/" handle="module:/classpath/var/M2_REPO/SkiWorld-web/target/classes">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="SkiWorld-ejb.jar" deploy-path="/" handle="module:/resource/SkiWorld-ejb/SkiWorld-ejb">
