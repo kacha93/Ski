@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+
+<body>
+
+	
+	
+	<h:form>
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<p:outputLabel value="First name:"></p:outputLabel>
+			<p:inputText required="true" value="#{subscriptionBean.client.firstName}"  ></p:inputText>
+			<p:outputLabel value="Last name:"></p:outputLabel>
+			<p:inputText required="true" value="#{subscriptionBean.client.lastName}"  ></p:inputText>
+			<p:outputLabel value="Email:"></p:outputLabel>
+			<p:inputText required="true" value="#{subscriptionBean.client.email}"  ></p:inputText>
+			<p:outputLabel value="National ID"> </p:outputLabel>
+			<p:inputText required="true" value="#{subscriptionBean.client.nationalId}"  ></p:inputText>
+			<p:outputLabel for="button" value="Birth Date:" />
+			<p:calendar id="button" value="#{subscriptionBean.client.birthDate}" showOn="button"  navigator="true"/>
+			<p:outputLabel value="Country:"></p:outputLabel>
+			<p:inputText required="true" value="#{subscriptionBean.client.adress.country}"  ></p:inputText>
+			<p:outputLabel value="City:"></p:outputLabel>
+			<p:inputText required="true" value="#{subscriptionBean.client.adress.city}" ></p:inputText>
+			<p:outputLabel value="Adress:"></p:outputLabel>
+			<p:inputText required="true" value="#{subscriptionBean.client.adress.adress}"></p:inputText>
+			<p:outputLabel value="Password: " />
+			<p:password required = "true" id="feedback" value="#{subscriptionBean.client.password}"
+				feedback="true" match="pwd2"
+				validatorMessage="Password mismatch" />
+
+			<p:outputLabel for="pwd2" value="Retype password: " />
+			<p:password id="pwd2" label="Password 2"  required="true"
+							requiredMessage="Retype password"/>
+
+		</h:panelGrid>
+
+
+		<p:commandLink class="btn btn-success"  update="growl" value="Sign Up"
+			actionListener="#{subscriptionBean.create()}" />
+	</h:form>
+
+
+</body>
+
+
+</html>
