@@ -83,6 +83,12 @@ public class HotelRoomReservationService implements  HotelRoomReservationService
 		return (findByDate(date).size()>0);
 		 
 	}
+
+	@Override
+	public List<HotelRoomReservation> findByPeriod(Date checkIn, Date checkOut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 //	public Date nextDay(Calendar date){
 //		date.

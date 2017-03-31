@@ -18,6 +18,7 @@ public interface HotelRoomReservationServiceLocal {
 	public List<HotelRoomReservation>findAll();
 	public List<HotelRoomReservation> findByDate(Date date);
 	public boolean checkAvailability (Date date);
+	public List<HotelRoomReservation> findByPeriod(Date checkIn, Date checkOut);
 	
 
 }

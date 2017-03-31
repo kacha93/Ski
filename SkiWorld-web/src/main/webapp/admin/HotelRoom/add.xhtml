@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<h:form>
+		<p:outputLabel value="Room Number" />
+		<p:inputText id="number" value="#{hotelRoomBean.item.number}" />
+		<br />
+		<p:outputLabel value="Room Price" />
+		<p:inputText id="price" value="#{hotelRoomBean.item.price}" />
+		<br />
+		<p:outputLabel value="Room Type" />
+		<p:inputText id="type" value="#{hotelRoomBean.item.type}" />
+		<br />
+
+		<p:outputLabel value="Hotel" />
+
+		<p:selectOneMenu id="hotel" converter="HotelConverter"
+			value="#{hotelRoomBean.item.hotel}" title="Hotel">
+			
+			<f:selectItems value="#{hotelBean.hotels}" var="hotel"
+				itemValue="#{hotel}" />
+		</p:selectOneMenu>
+
+		<h:commandButton value="Add"
+			actionListener="#{hotelRoomBean.create()}" />
+
+	</h:form>
+</body>
+</html>

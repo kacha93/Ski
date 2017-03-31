@@ -19,7 +19,10 @@ import javax.persistence.*;
     @NamedQuery(name = "HotelRoomReservation.findByCustomerNumber", query = "SELECT h FROM HotelRoomReservation h WHERE h.customerNumber = :customerNumber"),
     @NamedQuery(name = "HotelRoomReservation.findByEffective", query = "SELECT h FROM HotelRoomReservation h WHERE h.effective = :effective"),
     @NamedQuery(name = "HotelRoomReservation.findByReservationDate", query = "SELECT h FROM HotelRoomReservation h WHERE h.reservationDate = :reservationDate"),
-    @NamedQuery(name = "HotelRoomReservation.findByWithParking", query = "SELECT h FROM HotelRoomReservation h WHERE h.withParking = :withParking")})
+    @NamedQuery(name = "HotelRoomReservation.findByWithParking", query = "SELECT h FROM HotelRoomReservation h WHERE h.withParking = :withParking"),
+    @NamedQuery(name = "HotelRoomReservation.findByPeriod", query = "SELECT h FROM HotelRoomReservation h WHERE h.checkIn BETWEEN  :checkIn AND :checkOut  "),
+    
+    })
 
 public class HotelRoomReservation implements Serializable {
 

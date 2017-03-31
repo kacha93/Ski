@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<!--      avec template : enlever <h:head></h:head> et ajouter  -->
+<!--      <ui:composition template="/template"> -->
+<!--      <ui:define nam="head"> -->
+
+<h:head></h:head>
+
+<!--     avec template : enlever <body> et ajouter -->
+<!--     <ui:define name="body"> -->
+
+<body>
+	<p:growl id="growl" />
+	<h:form id="HotelListForm">
+		<p:panel header="List Hotel">
+			<p:dataTable id="datalist" value="#{hotelBean.hotels}" var="item"
+				paginator="true" rows="10" rowsPerPageTemplate="10,20,30,40,50">
+
+
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="id" />
+					</f:facet>
+					<h:outputText value="#{item.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="name" />
+					</f:facet>
+					<h:outputText value="#{item.name}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="country" />
+					</f:facet>
+					<h:outputText value="#{item.adress.country}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="city" />
+					</f:facet>
+					<h:outputText value="#{item.adress.city}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="adress" />
+					</f:facet>
+					<h:outputText value="#{item.adress.adress}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="available rooms" />
+					</f:facet>
+					<h:outputText value="#{item.availableRooms}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="logo" />
+					</f:facet>
+					<h:outputText value="#{item.logo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="rooms number" />
+					</f:facet>
+					<h:outputText value="#{item.roomNumber}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="stars" />
+					</f:facet>
+					<h:outputText value="#{item.stars}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="hotel manager" />
+					</f:facet>
+					<h:outputText value="#{item.hotelManager}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Delete" />
+					</f:facet>
+					<p:commandButton ajax="true" id="deleteButton" update="datalist"
+						actionListener="#{hotelBean.delete(item)}" value="Delete"
+						icon="ui-icon-trash" immediate="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Edit" />
+					</f:facet>
+					<p:commandButton id="editButton" ajax="true"
+						actionListener="#{hotelBean.prepareEdit(item)}"
+						icon="ui-icon-pencil" value="Edit" update=":HotelEditForm"
+						oncomplete="PF('HotelEditDialog').show()" />
+
+
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton id="createButton" icon="ui-icon-plus" ajax="true"
+						value="Create" actionListener="#{hotelBean.prepareCreate()}"
+						update=":HotelCreateForm"
+						oncomplete="PF('HotelCreateDialog').show()" />
+				</f:facet>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+	<!-- Creation form -->
+
+	<p:dialog id="HotelCreateDlg" widgetVar="HotelCreateDialog"
+		modal="true" resizable="true" header="New Hotel">
+		<h:form id="HotelCreateForm" enctype="multipart/form-data">
+			<p:panel>
+
+
+				<p:panelGrid id="grid" columns="2" rendered="#{hotelBean.addVisble}">
+
+					<p:outputLabel value="Name" />
+					<p:inputText id="name" value="#{hotelBean.hotel.name}" />
+
+					<p:outputLabel value="Room Numbers" />
+					<p:inputText id="rooms" value="#{hotelBean.hotel.roomNumber}" />
+
+					<p:outputLabel value="Stars" />
+					<p:rating id="stars" stars="6" value="#{hotelBean.hotel.stars}" />
+
+					<p:outputLabel for="country" value="Country: " />
+					<p:selectOneMenu id="country" value="#{hotelBean.country}"
+						>
+						<p:ajax listener="#{hotelBean.onCountryChange}" update="city" />
+						<f:selectItem itemLabel="Select Country" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{hotelBean.countries}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="city" value="City: " />
+					<p:selectOneMenu id="city" value="#{hotelBean.city}"
+						>
+						<f:selectItem itemLabel="Select City" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{hotelBean.cities}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Adress" />
+					<p:inputText id="adress" value="#{hotelBean.hotel.adress.adress}" />
+
+					<p:outputLabel value="logo" />
+					<p:fileUpload value="#{hotelBean.file}" mode="advanced" auto="true"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						fileUploadListener="#{hotelBean.upload}" skinSimple="true" />
+
+				</p:panelGrid>
+
+				<p:commandButton value="Save" actionListener="#{hotelBean.create}"
+					update="HotelListForm:datalist,grid,growl"
+					oncomplete="PF('HotelCreateDialog').hide();" ajax="true" />
+
+
+
+
+
+
+
+			</p:panel>
+
+		</h:form>
+	</p:dialog>
+
+
+	<!-- Edit Form -->
+
+	<p:dialog id="HotelEditDlg" widgetVar="HotelEditDialog" modal="true"
+		resizable="false" appendTo="@(body)" header="#{bundle.EditHotelTitle}">
+		<h:form id="HotelEditForm">
+			<p:panel>
+
+
+				<p:panelGrid columns="2" rendered="#{hotelBean.editVisible}"
+					id="grid">
+
+					<p:outputLabel value="Name" />
+					<p:inputText id="name" value="#{hotelBean.hotel.name}" />
+
+					<p:outputLabel value="Room Numbers" />
+					<p:inputText id="rooms" value="#{hotelBean.hotel.roomNumber}" />
+
+					<p:outputLabel value="Stars" />
+					<p:rating id="stars" stars="6" value="#{hotelBean.hotel.stars}" />
+
+					<p:outputLabel for="country" value="Country: " />
+					<p:selectOneMenu id="country" value="#{hotelBean.country}"
+						>
+						<p:ajax listener="#{hotelBean.onCountryChange}" update="city" />
+						<f:selectItem itemLabel="Select Country" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{hotelBean.countries}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="city" value="City: " />
+					<p:selectOneMenu id="city" value="#{hotelBean.city}"
+						>
+						<f:selectItem itemLabel="Select City" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{hotelBean.cities}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Adress" />
+					<p:inputText id="adress" value="#{hotelBean.hotel.adress.adress}" />
+
+					<p:outputLabel value="logo" />
+					<p:fileUpload value="#{hotelBean.file}" mode="advanced" auto="true"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						fileUploadListener="#{hotelBean.upload}" skinSimple="true" />
+
+				</p:panelGrid>
+
+				<p:commandButton value="Save" actionListener="#{hotelBean.edit()}"
+					update="HotelListForm:datalist,grid,growl"
+					oncomplete="PF('HotelCreateDialog').hide();" />
+
+
+			</p:panel>
+		</h:form>
+	</p:dialog>
+
+
+
+</body>
+
+<!-- </ui:define> -->
+<!-- </ui:composition> -->
+
+</html>
