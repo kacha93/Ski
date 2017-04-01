@@ -9,8 +9,11 @@ public class Adress {
 	private String country;
 	@Size(min=3 , message="City must be at least of 3 length")
 	private String city;
+<<<<<<< Upstream, based on origin/master
 	@Size(min=3,message="Adress must be at lest of 3 length")
 	
+=======
+>>>>>>> 0bbfb85 Ahmed Commit
 	private String adress;
 	
 	public String getCountry() {
@@ -33,7 +36,11 @@ public class Adress {
 	}
 	@Override
 	public String toString() {
+<<<<<<< Upstream, based on origin/master
 		return "country:" + country + ", city:" + city + ", adress:" + adress;
+=======
+		return "Adress [country=" + country + ", city=" + city + ", adress=" + adress + "]";
+>>>>>>> 0bbfb85 Ahmed Commit
 	}
 	@Override
 	public int hashCode() {
@@ -76,10 +83,16 @@ public class Adress {
 		this.city = city;
 		this.adress = adress;
 	}
+<<<<<<< Upstream, based on origin/master
 	public Adress() {
 		super();
 	}
+=======
+>>>>>>> 0bbfb85 Ahmed Commit
 	
 	
+<<<<<<< Upstream, based on origin/master
 	
+=======
+>>>>>>> 0bbfb85 Ahmed Commit
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+<h:form>
+	<h:dataTable var="item" value="#{restaurantTableReservationBean.restaurantResList}">
+	<h:column>#{item.pk.tableId}</h:column>
+	<h:column>#{item.pk.userId}</h:column>
+	<h:column>#{item.reservationDate}</h:column>
+	<h:column>#{item.customersNumber}</h:column>
+	
+	<h:column>
+	<h:commandButton actionListener="#{restaurantTableReservationBean.DeleteRestaurantTableReservation(item)}" value="Delete" immediate="true" />
+	</h:column>
+	<h:column>
+	<h:commandButton actionListener="#{restaurantTableReservationBean.prepareUpdateRestaurantTableReservation(item)}" value="Update"  >
+	</h:commandButton>
+	</h:column>
+	
+	</h:dataTable>
+	<h:commandButton actionListener="#{restaurantTableReservationBean.prepareAddRestaurantTableReservation()}" value="Add"  >
+	</h:commandButton>
+</h:form>
+	<h:form rendered="#{restaurantTableReservationBean.addVisble}">
+		<h:outputLabel value="Reservation Date" />
+		<h:inputText value="#{restaurantTableReservationBean.restaurantTableReservation.reservationDate}" />
+		<br />
+		<h:outputLabel value="Customers Number" />
+		<h:inputText value="#{restaurantTableReservationBean.restaurantTableReservation.customersNumber}" />
+		<br />
+
+
+		<h:commandButton value="Save" action="#{restaurantTableReservationBean.UpdateRestaurantTableReservation()}" />
+	</h:form>
+	<h:form rendered="#{restaurantTableBean.editVisible}">
+	<h:outputLabel value="Reservation Date" />
+		<h:inputText value="#{restaurantTableReservationBean.restaurantTableReservation.reservationDate}" />
+		<br />
+		<h:outputLabel value="Customers Number" />
+		<h:inputText value="#{restaurantTableReservationBean.restaurantTableReservation.customersNumber}" />
+		<br />
+
+
+		<h:commandButton value="Save" action="#{restaurantTableReservationBean.AddRestaurantTableReservation()}" />
+	</h:form>
+</body> 
+</html>
