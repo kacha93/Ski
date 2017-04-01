@@ -10,7 +10,9 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-   <filter>
+  
+<!-- ClientFilter -->
+  <filter>
     <display-name>ClientFilter</display-name>
     <filter-name>ClientFilter</filter-name>
     <filter-class>tn.esprit.filters.ClientFilter</filter-class>
@@ -18,5 +20,30 @@
   <filter-mapping>
     <filter-name>ClientFilter</filter-name>
     <url-pattern>/client/*</url-pattern>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- Admins Filter -->
+  <filter>
+    <display-name>AdminsFilter</display-name>
+    <filter-name>AdminsFilter</filter-name>
+    <filter-class>tn.esprit.filters.AdminsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminsFilter</filter-name>
+    <url-pattern>/client/*</url-pattern>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+ 
+ 
+ <!-- Filter client secondaire -->
+  <filter>
+    <display-name>ClientSecondFilter</display-name>
+    <filter-name>ClientSecondFilter</filter-name>
+    <filter-class>tn.esprit.filters.ClientSecondFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ClientSecondFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
   </filter-mapping>
 </web-app>

@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.context.FacesContext;
 
 import tn.esprit.entities.Client;
 import tn.esprit.entities.User;
@@ -28,7 +28,7 @@ public class SubscriptionBean {
 	
 	private Client client ; 
 	private List<User> clients;
-
+	FacesContext facesContext = FacesContext.getCurrentInstance();
 	private boolean loggedIn=false;
 	
 	
@@ -91,20 +91,19 @@ public class SubscriptionBean {
 
 
 
-	public void prepareCreate(){
-		init();
-		
-	}
+
 	
 
 	public String create(){
 		
 		
 		ejb.create(client);
-		loggedIn = true;
+		this.setLoggedIn(true);
 		
-		init();
-		FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Subscription success", null);
+		
+		
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Subscription Success","Subscription Success"));
+        init();
 		return null;
 	}
 }

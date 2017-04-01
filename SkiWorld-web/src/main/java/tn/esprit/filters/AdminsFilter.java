@@ -14,14 +14,14 @@ import tn.esprit.beans.LoginBean;
 import tn.esprit.beans.SubscriptionBean;
 
 /**
- * Servlet Filter implementation class ClientFilter
+ * Servlet Filter implementation class AdminsFilter
  */
-public class ClientFilter implements Filter {
+public class AdminsFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public ClientFilter() {
+    public AdminsFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -41,7 +41,7 @@ public class ClientFilter implements Filter {
 		LoginBean loginBean = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("loginBean");
 		SubscriptionBean subscriptionBean = (SubscriptionBean)((HttpServletRequest)request).getSession().getAttribute("subscriptionBean");
 
-		if ((loginBean == null || subscriptionBean == null) && (!loginBean.isLoggedIn()|| !subscriptionBean.isLoggedIn())) {
+		if ((loginBean == null || subscriptionBean == null) || (!loginBean.isLoggedIn()|| !subscriptionBean.isLoggedIn())) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse)response).sendRedirect(contextPath + "/index.xhtml");
 		}

@@ -14,14 +14,14 @@ import tn.esprit.beans.LoginBean;
 import tn.esprit.beans.SubscriptionBean;
 
 /**
- * Servlet Filter implementation class ClientFilter
+ * Servlet Filter implementation class ClientSecondFilter
  */
-public class ClientFilter implements Filter {
+public class ClientSecondFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public ClientFilter() {
+    public ClientSecondFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -36,16 +36,15 @@ public class ClientFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
 		LoginBean loginBean = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("loginBean");
 		SubscriptionBean subscriptionBean = (SubscriptionBean)((HttpServletRequest)request).getSession().getAttribute("subscriptionBean");
 
-		if ((loginBean == null || subscriptionBean == null) && (!loginBean.isLoggedIn()|| !subscriptionBean.isLoggedIn())) {
+		if ((loginBean != null || subscriptionBean != null) && (loginBean.isLoggedIn() || subscriptionBean.isLoggedIn())) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(contextPath + "/index.xhtml");
+			((HttpServletResponse)response).setStatus(404);
 		}
 		chain.doFilter(request, response);
+	
 	}
 
 	/**
